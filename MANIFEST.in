@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include quotation_comparison *.css
+recursive-include quotation_comparison *.csv
+recursive-include quotation_comparison *.html
+recursive-include quotation_comparison *.ico
+recursive-include quotation_comparison *.js
+recursive-include quotation_comparison *.json
+recursive-include quotation_comparison *.md
+recursive-include quotation_comparison *.png
+recursive-include quotation_comparison *.py
+recursive-include quotation_comparison *.svg
+recursive-include quotation_comparison *.txt
+recursive-exclude quotation_comparison *.pyc
