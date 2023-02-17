@@ -1,6 +1,6 @@
 ## Quotation Comparison
 
-Quotation Comparison Tool for ERPNext
+Supplier Quotation Comparison Tool for ERPNext
 
 #### License
 
