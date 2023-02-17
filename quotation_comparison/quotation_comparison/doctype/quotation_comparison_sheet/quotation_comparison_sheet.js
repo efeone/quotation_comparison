@@ -3,6 +3,9 @@
 frappe.ui.form.on('Quotation Comparison Sheet', {
 	refresh: function(frm) {
 		frm.trigger('set_query');
+		if(!frm.doc.quotations.length){
+			frm.trigger('request_for_quotation');
+		}
 		set_custom_buttons(frm);
 	},
 	request_for_quotation: function(frm) {
@@ -121,13 +124,18 @@ let set_custom_buttons = function(frm){
 }
 
 let order_items_by_filter = function(frm, type){
-	frm.call('order_items_by_filter',{
-			type: type
-		}).then(
-		res=>{
-			frm.reload_doc();
-		}
-	)
+	if(!frm.is_dirty()){
+		frm.call('order_items_by_filter',{
+				type: type
+			}).then(
+			res=>{
+				frm.reload_doc();
+			}
+		)
+	}
+	else {
+		frappe.throw(__('Please save document before Analyse..'))
+	}
 }
 
 let create_purchase_orders = function(frm, type){
