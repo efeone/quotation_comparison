@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe import _
 from frappe.utils import *
+from frappe.model.mapper import get_mapped_doc
 from frappe.model.document import Document
 
 class QuotationComparisonSheet(Document):
@@ -153,3 +154,15 @@ def find_item_details_with_lowest_price(self, item_code):
 					item_price = item.rate
 					item_detaills = item
 	return item_detaills.as_dict()
+
+@frappe.whitelist()
+def create_comparison_sheet(source_name, target_doc=None):
+	def set_missing_values(source, target):
+		target.request_for_quotation = source.name
+	doclist = get_mapped_doc("Request for Quotation", source_name,{
+		"Request for Quotation": {
+			"doctype": "Quotation Comparison Sheet"
+		},
+	}, target_doc, set_missing_values)
+	doclist.save()
+	return doclist
